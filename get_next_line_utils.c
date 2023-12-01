@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: boel-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: boel-bou <boel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 00:17:38 by boel-bou          #+#    #+#             */
-/*   Updated: 2023/11/30 16:41:49 by boel-bou         ###   ########.fr       */
+/*   Updated: 2023/12/01 17:21:30 by boel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,56 +31,38 @@ char	*ft_strchr(char *str, char i)
 	j = 0;
 	if (!str)
 		return (NULL);
-	while (str[j] && str[j] != i)
+	while (str[j] != '\0')
+	{
+		if (str[j] == i)
+			return (str + j);
 		j++;
-	if (str[j] == i)
-		return (str + j);
+	}
 	return (NULL);
 }
 
-void	ft_bzero(char *str, int n)
-{
-	int	i;
-
-	i = 0;
-	while (i < n)
-		str[i++] = '\0';
-}
-
-char	*ft_calloc(int count, int size)
-{
-	char	*p;
-
-	p = malloc(count * size);
-	if (!p)
-		return (NULL);
-	ft_bzero(p, count * size);
-	return (p);
-}
-
 char	*ft_strjoin(char *s1, char *s2)
-{	
+{
 	char	*join;
 	int		j;
-	int		l;
+	int		i;
 
 	if (!s1)
-		s1 = ft_calloc(1, 1);
+	{
+		s1 = malloc(1);
+		s1[0] = '\0';
+	}
 	if (!s1 || !s2)
 		return (NULL);
 	j = 0;
-	l = ft_strlen(s1) + ft_strlen(s2);
-	join = ft_calloc(l + 1, 1);
+	join = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!join)
 		return (NULL);
-	l = 0;
-	while (s1[l])
-	{
-		join[l] = s1[l];
-		l++;
-	}
+	i = -1;
+	while (s1[++i])
+		join[i] = s1[i];
 	while (s2[j])
-		join[l++] = s2[j++];
+		join[i++] = s2[j++];
+	join[i] = '\0';
 	free(s1);
 	return (join);
 }
