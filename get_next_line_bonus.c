@@ -6,7 +6,7 @@
 /*   By: boel-bou <boel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 22:18:55 by boel-bou          #+#    #+#             */
-/*   Updated: 2023/12/01 16:29:24 by boel-bou         ###   ########.fr       */
+/*   Updated: 2023/12/11 15:45:10 by boel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	*get_buffer(int fd, char *str)
 	int		i;
 	char	*buffer;
 
-	buffer = (char *)malloc(BUFFER_SIZE + 1);
+	buffer = (char *)malloc(BUFFER_SIZE + 1 * sizeof(char));
 	if (!buffer)
 		return (NULL);
 	i = 1;
